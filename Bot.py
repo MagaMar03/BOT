@@ -365,7 +365,7 @@ class BotDenunciasSUNAT:
         self.denuncias_fallidas = 0
         
         # URL
-        self.URL_LOGIN = "http://intranet.sunat.gob.pe/"
+        self.URL_LOGIN = "https://intranet.sunat.peru/cl-at-iamenu/"
         
         self.log("Bot inicializado correctamente")
     
@@ -417,27 +417,27 @@ class BotDenunciasSUNAT:
             self.log("Realizando login...")
             self.driver.get(self.URL_LOGIN)
             time.sleep(2)
-            
+
             # Usuario
             campo_usuario = self.wait.until(
-                EC.presence_of_element_located((By.NAME, "p_user"))
+                EC.presence_of_element_located((By.NAME, "cuenta"))
             )
             campo_usuario.clear()
             campo_usuario.send_keys(self.USUARIO)
-            
+
             # Password
-            campo_password = self.driver.find_element(By.NAME, "p_password")
+            campo_password = self.driver.find_element(By.NAME, "password")
             campo_password.clear()
             campo_password.send_keys(self.PASSWORD)
-            
-            # Click Aceptar
-            boton_aceptar = self.driver.find_element(By.NAME, "submit")
-            boton_aceptar.click()
-            
+
+            # Click Iniciar Sesion
+            boton_iniciar = self.driver.find_element(By.XPATH, "//input[@type='button' and @value='Iniciar Sesion']")
+            boton_iniciar.click()
+
             time.sleep(3)
             self.log("✅ Login exitoso")
             return True
-            
+
         except Exception as e:
             self.log(f"❌ Error en login: {str(e)}")
             return False
